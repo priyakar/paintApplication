@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PaintApplication</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_palette">Palette</string>
+    <string name="action_brush">Brush</string>
+    <string name="action_clear">Clear All</string>
+
+</resources>
