@@ -30,7 +30,8 @@ public class DrawableViewClass extends View {
     int i=0;
     Bitmap canvasBitmap = null;
     List <RecordPath> recordPaths = new ArrayList<RecordPath>();
-    int initColor = Color.BLACK, initBrushSize = 20;
+    int initColor = Color.BLACK;
+    float initBrushSize = 20;
     public DrawableViewClass(Context context, AttributeSet attrs) {
         super(context, attrs);
         startDrawingCanvas();
@@ -60,7 +61,6 @@ public class DrawableViewClass extends View {
         canvas.drawBitmap(canvasBitmap, 0, 0, drawingPaint);
 
         if (recordPaths.size()>0) {
-            Log.e("value of i", "" + recordPaths.size());
             for (int i = 0; i < recordPaths.size() ; i++) {
                 canvas.drawPath(recordPaths.get(i).getSavePath(), recordPaths.get(i).getSavePaint());
             }
@@ -86,14 +86,13 @@ public class DrawableViewClass extends View {
                 uniquePaint.setStrokeWidth(initBrushSize);
                 uniquePaint.setStyle(Paint.Style.STROKE);
                 uniquePath.moveTo(drawX, drawY);
+                recordPaths.add(new RecordPath(uniquePath, uniquePaint));
                 break;
             case MotionEvent.ACTION_MOVE:
                 uniquePath.lineTo(drawX, drawY);
-
                 break;
             case MotionEvent.ACTION_UP:
-                //drawingCanvas.drawPath(drawingPath, drawingPaint);
-                recordPaths.add(new RecordPath(uniquePath,uniquePaint));
+                drawingCanvas.drawPath(uniquePath, uniquePaint);
                 i++;
                 break;
             default:
@@ -113,11 +112,15 @@ public class DrawableViewClass extends View {
 
     public void setBrushSize(float mlarge) {
 //        invalidate();
+        initBrushSize = mlarge;
         drawingPaint.setStrokeWidth(mlarge);
+
     }
 
     public void resetCanvas() {
-        drawingPath.reset();
+        for (int i = 0; i < recordPaths.size(); i++) {
+            recordPaths.get(i).getSavePath().reset();
+        }
         invalidate();
     }
 }

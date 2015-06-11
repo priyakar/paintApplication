@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -170,4 +171,5 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         btnBrushLarge.setVisibility(View.INVISIBLE);
         brushVisible = false;
     }
+
 }
