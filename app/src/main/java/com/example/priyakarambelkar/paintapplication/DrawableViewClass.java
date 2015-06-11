@@ -13,7 +13,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by priyakarambelkar on 6/9/15.
@@ -23,8 +25,11 @@ public class DrawableViewClass extends View {
     Path drawingPath;
     Paint drawingPaint, drawingOnCanvas;
     Canvas drawingCanvas;
+    Path uniquePath = new Path();
+    Paint uniquePaint = new Paint();
+    int i=0;
     Bitmap canvasBitmap = null;
-    HashMap<Path, Integer> saveColorPath = new HashMap<Path, Integer>();
+    List <RecordPath> recordPaths = new ArrayList<RecordPath>();
     int initColor = Color.BLACK, initBrushSize = 20;
     public DrawableViewClass(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -35,6 +40,7 @@ public class DrawableViewClass extends View {
         drawingPath = new Path();
         drawingPaint = new Paint();
         drawingPaint.setColor(initColor);
+        drawingPaint.setAntiAlias(true);
         drawingPaint.setStrokeWidth(initBrushSize);
         drawingPaint.setStyle(Paint.Style.STROKE);
         drawingOnCanvas = new Paint (Paint.DITHER_FLAG);
@@ -50,27 +56,45 @@ public class DrawableViewClass extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
         drawingCanvas.drawColor(Color.WHITE);
-        canvas.drawBitmap(canvasBitmap, 0, 0, drawingOnCanvas);
-        canvas.drawPath(drawingPath, drawingPaint);
+        canvas.drawBitmap(canvasBitmap, 0, 0, drawingPaint);
 
+        if (recordPaths.size()>0) {
+            Log.e("value of i", "" + recordPaths.size());
+            for (int i = 0; i < recordPaths.size() ; i++) {
+                canvas.drawPath(recordPaths.get(i).getSavePath(), recordPaths.get(i).getSavePaint());
+            }
+
+
+        } else {
+            canvas.drawPath(drawingPath, drawingPaint);
+        }
     }
 
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         float drawX = event.getX();
         float drawY = event.getY();
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                drawingPath.moveTo(drawX,drawY);
+                //drawingPath.moveTo(drawX, drawY);
+                uniquePath = new Path();
+                uniquePaint = new Paint();
+                uniquePaint.setColor(initColor);
+                uniquePaint.setStrokeWidth(initBrushSize);
+                uniquePaint.setStyle(Paint.Style.STROKE);
+                uniquePath.moveTo(drawX, drawY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                drawingPath.lineTo(drawX, drawY);
+                uniquePath.lineTo(drawX, drawY);
+
                 break;
             case MotionEvent.ACTION_UP:
-                drawingCanvas.drawPath(drawingPath, drawingPaint);
+                //drawingCanvas.drawPath(drawingPath, drawingPaint);
+                recordPaths.add(new RecordPath(uniquePath,uniquePaint));
+                i++;
                 break;
             default:
                 return false;
@@ -80,7 +104,7 @@ public class DrawableViewClass extends View {
     }
 
     public void setColor(String colorName) {
-        invalidate();
+//        invalidate();
         //saveColorPath.put(drawingPath, drawingPaint.getColor());
         //drawingPath = drawingCanvas.drawPath(saveColorPath.get(drawingPath));
         initColor = Color.parseColor(colorName);
@@ -88,7 +112,7 @@ public class DrawableViewClass extends View {
     }
 
     public void setBrushSize(float mlarge) {
-        invalidate();
+//        invalidate();
         drawingPaint.setStrokeWidth(mlarge);
     }
 
