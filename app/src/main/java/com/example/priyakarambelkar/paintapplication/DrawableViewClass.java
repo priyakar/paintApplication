@@ -6,10 +6,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PorterDuff;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
+
+import java.util.HashMap;
 
 /**
  * Created by priyakarambelkar on 6/9/15.
@@ -17,11 +21,11 @@ import android.widget.Toast;
 public class DrawableViewClass extends View {
 
     private Path drawingPath;
-    private Paint drawingPaint, drawingOnCanvas;
+    Paint drawingPaint, drawingOnCanvas;
     private Canvas drawingCanvas;
     private Bitmap canvasBitmap = null;
-    int initColor = 0x0066FF;
-
+    private HashMap<Path, Integer> saveColorPath = new HashMap<Path, Integer>();
+    private int initColor = Color.BLACK, initBrushSize = 20;
     public DrawableViewClass(Context context, AttributeSet attrs) {
         super(context, attrs);
         startDrawingCanvas();
@@ -30,12 +34,9 @@ public class DrawableViewClass extends View {
     private void startDrawingCanvas() {
         drawingPath = new Path();
         drawingPaint = new Paint();
-        drawingPaint.setAntiAlias(true);
-        drawingPaint.setColor(Color.BLUE);
-        drawingPaint.setStrokeWidth(50);
+        drawingPaint.setColor(initColor);
+        drawingPaint.setStrokeWidth(initBrushSize);
         drawingPaint.setStyle(Paint.Style.STROKE);
-        drawingPaint.setStrokeCap(Paint.Cap.ROUND);
-        drawingPaint.setStrokeJoin(Paint.Join.ROUND);
         drawingOnCanvas = new Paint (Paint.DITHER_FLAG);
 
     }
@@ -50,6 +51,7 @@ public class DrawableViewClass extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        drawingCanvas.drawColor(Color.WHITE);
         canvas.drawBitmap(canvasBitmap, 0, 0, drawingOnCanvas);
         canvas.drawPath(drawingPath, drawingPaint);
 
@@ -74,5 +76,22 @@ public class DrawableViewClass extends View {
         }
         invalidate();
         return true;
+    }
+
+    public void setColor(String colorName) {
+        invalidate();
+
+        initColor = Color.parseColor(colorName);
+        drawingPaint.setColor(initColor);
+    }
+
+    public void setBrushSize(float mlarge) {
+        invalidate();
+        drawingPaint.setStrokeWidth(mlarge);
+    }
+
+    public void resetCanvas() {
+        drawingPath.reset();
+        invalidate();
     }
 }
