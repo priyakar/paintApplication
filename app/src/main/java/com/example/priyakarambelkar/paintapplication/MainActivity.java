@@ -27,7 +27,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
     public boolean visible = false;
     public boolean brushVisible = false;
-    private DrawableViewClass drawableView, ColorChangeRed;
+    private DrawableViewClass drawableView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,15 +70,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 }
                 break;
             case R.id.red_color_btn:
-                //drawableView.setColor("RED");
-                ColorChangeRed.initColor = Color.RED;
-                ColorChangeRed.initBrushSize = 20;
-                ColorChangeRed.drawingPaint = new Paint();
-                ColorChangeRed.drawingPath = new Path();
-                ColorChangeRed.drawingPaint.setStyle(Paint.Style.STROKE);
-                ColorChangeRed.drawingOnCanvas = new Paint(Paint.DITHER_FLAG);
-                ColorChangeRed.invalidate();
-
+                drawableView.setColor("RED");
                 break;
             case R.id.green_color_btn:
                 drawableView.setColor("GREEN");
@@ -86,7 +78,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
             case R.id.pink_color_btn:
                 drawableView.setColor("MAGENTA");
                 break;
-
             case R.id.blue_color_btn:
                 drawableView.setColor("BLUE");
                 break;
@@ -119,7 +110,6 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         resetCanvas = (ImageButton) findViewById(R.id.reset_btn);
         brushSize = (ImageButton) findViewById(R.id.brush_btn);
         drawableView = (DrawableViewClass) findViewById(R.id.drawCustomView);
-        ColorChangeRed = (DrawableViewClass) findViewById(R.id.drawCustomView);
         btnRedColor =  (Button) findViewById(R.id.red_color_btn);
         btnBlueColor =  (Button) findViewById(R.id.blue_color_btn);
         btnGreenColor =  (Button) findViewById(R.id.green_color_btn);
