@@ -20,12 +20,12 @@ import java.util.HashMap;
  */
 public class DrawableViewClass extends View {
 
-    private Path drawingPath;
+    Path drawingPath;
     Paint drawingPaint, drawingOnCanvas;
-    private Canvas drawingCanvas;
-    private Bitmap canvasBitmap = null;
-    private HashMap<Path, Integer> saveColorPath = new HashMap<Path, Integer>();
-    private int initColor = Color.BLACK, initBrushSize = 20;
+    Canvas drawingCanvas;
+    Bitmap canvasBitmap = null;
+    HashMap<Path, Integer> saveColorPath = new HashMap<Path, Integer>();
+    int initColor = Color.BLACK, initBrushSize = 20;
     public DrawableViewClass(Context context, AttributeSet attrs) {
         super(context, attrs);
         startDrawingCanvas();
@@ -57,6 +57,7 @@ public class DrawableViewClass extends View {
 
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float drawX = event.getX();
@@ -80,7 +81,8 @@ public class DrawableViewClass extends View {
 
     public void setColor(String colorName) {
         invalidate();
-
+        //saveColorPath.put(drawingPath, drawingPaint.getColor());
+        //drawingPath = drawingCanvas.drawPath(saveColorPath.get(drawingPath));
         initColor = Color.parseColor(colorName);
         drawingPaint.setColor(initColor);
     }
