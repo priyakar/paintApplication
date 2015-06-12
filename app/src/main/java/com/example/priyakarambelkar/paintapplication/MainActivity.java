@@ -1,20 +1,16 @@
 package com.example.priyakarambelkar.paintapplication;
 
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Path;
-import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
+import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Xml;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+public class MainActivity extends Activity implements View.OnClickListener {
     ImageButton palette;
     ImageButton brushSize;
     ImageButton resetCanvas;
@@ -25,6 +21,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
     Button btnBrushSmall;
     Button btnBrushMedium;
     Button btnBrushLarge;
+    Bitmap saveBitmap;
 
     public boolean visible = false;
     public boolean brushVisible = false;
@@ -53,11 +50,23 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+//            saveBitmap = drawableView.getCanvasBitmap();
+//            if (saveBitmap != null){
+//                try {
+//                    FileOutputStream save = getApplicationContext().openFileOutput("saveFile.jpg", Context.MODE_WORLD_READABLE);
+//                    saveBitmap.compress(Bitmap.CompressFormat.JPEG, 100, save);
+//                    save.close();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//            return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
     @Override
     public void onClick(View v) {
         int clickBtnId = v.getId();
