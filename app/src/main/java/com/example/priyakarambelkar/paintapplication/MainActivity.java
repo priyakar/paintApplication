@@ -1,8 +1,12 @@
 package com.example.priyakarambelkar.paintapplication;
 
-import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -10,7 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener {
     ImageButton palette;
     ImageButton brushSize;
     ImageButton resetCanvas;
@@ -22,7 +26,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     Button btnBrushMedium;
     Button btnBrushLarge;
     Bitmap saveBitmap;
-
+    public static final int SELECT_ONE = 1;
     public boolean visible = false;
     public boolean brushVisible = false;
     private DrawableViewClass drawableView;
@@ -50,17 +54,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-//            saveBitmap = drawableView.getCanvasBitmap();
-//            if (saveBitmap != null){
-//                try {
-//                    FileOutputStream save = getApplicationContext().openFileOutput("saveFile.jpg", Context.MODE_WORLD_READABLE);
-//                    saveBitmap.compress(Bitmap.CompressFormat.JPEG, 100, save);
-//                    save.close();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//            return true;
+            return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -181,4 +175,27 @@ public class MainActivity extends Activity implements View.OnClickListener {
         brushVisible = false;
     }
 
+    public void openGalleryIntent(View v) {
+        Intent image = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+        startActivityForResult(image, SELECT_ONE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_ONE) {
+                Uri selectedImage = data.getData();
+                try {
+                    saveBitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+                    drawableView.setBitmap(saveBitmap);
+                    Log.e("image", "successful");
+                } catch (Exception e) {
+                    e.getMessage();
+                    Log.e("image", "fail");
+                }
+            }
+        }
+    }
 }

@@ -115,6 +115,17 @@
             android:layout_alignParentBottom="true"
             android:layout_toRightOf="@+id/brush_medium"
             android:layout_toEndOf="@+id/brush_medium" />
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/button"
+            android:text="Gallery"
+            android:onClick="openGalleryIntent"
+            android:layout_alignParentBottom="true"
+            android:layout_alignRight="@+id/reset_btn"
+            android:layout_alignEnd="@+id/reset_btn" />
     </RelativeLayout>
 
 

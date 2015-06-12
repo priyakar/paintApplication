@@ -55,13 +55,10 @@ public class DrawableViewClass extends View {
     protected void onDraw(Canvas canvas) {
         drawingCanvas.drawColor(Color.WHITE);
         canvas.drawBitmap(canvasBitmap, 0, 0, drawingPaint);
-
         if (recordPaths.size()>0) {
             for (int i = 0; i < recordPaths.size() ; i++) {
                 canvas.drawPath(recordPaths.get(i).getSavePath(), recordPaths.get(i).getSavePaint());
             }
-
-
         } else {
             canvas.drawPath(drawingPath, drawingPaint);
         }
@@ -75,7 +72,6 @@ public class DrawableViewClass extends View {
         float drawY = event.getY();
         switch (event.getAction()){
             case MotionEvent.ACTION_DOWN:
-                //drawingPath.moveTo(drawX, drawY);
                 uniquePath = new Path();
                 uniquePaint = new Paint();
                 uniquePaint.setColor(initColor);
@@ -97,6 +93,7 @@ public class DrawableViewClass extends View {
         invalidate();
         return true;
     }
+
 
     public void setColor(String colorName) {
 //        invalidate();
@@ -122,5 +119,10 @@ public class DrawableViewClass extends View {
 
     public Bitmap getCanvasBitmap() {
         return canvasBitmap;
+    }
+
+    public void setBitmap(Bitmap saveBitmap) {
+        canvasBitmap = saveBitmap;
+        invalidate();
     }
 }
