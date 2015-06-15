@@ -13,9 +13,6 @@ import android.view.View;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by priyakarambelkar on 6/9/15.
- */
 public class DrawableViewClass extends View {
 
     Path drawingPath;
@@ -95,11 +92,11 @@ public class DrawableViewClass extends View {
     }
 
 
-    public void setColor(String colorName) {
+    public void setColor(int colorName) {
 //        invalidate();
         //saveColorPath.put(drawingPath, drawingPaint.getColor());
         //drawingPath = drawingCanvas.drawPath(saveColorPath.get(drawingPath));
-        initColor = Color.parseColor(colorName);
+        initColor = (colorName);
         drawingPaint.setColor(initColor);
     }
 

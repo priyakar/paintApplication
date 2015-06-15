@@ -8,12 +8,10 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:background="@android:color/white"
+        android:background="#CECFCE"
         android:id="@+id/palette_layout">
         <ImageButton
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="50dp"
-            android:layout_height="55dp"
+            style="@style/ImageButtonWeights"
             android:background="@drawable/round_button"
             android:id="@+id/palette"
             android:layout_alignParentTop="true"
@@ -23,9 +21,7 @@
             android:layout_alignParentStart="true" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
+            style="@style/ButtonWeights"
             android:background="@drawable/blue_color"
             android:id="@+id/blue_color_btn"
             android:scaleType="fitCenter"
@@ -33,9 +29,7 @@
             android:layout_toEndOf="@+id/palette" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
+            style="@style/ButtonWeights"
             android:background="@drawable/pink_color"
             android:id="@+id/pink_color_btn"
             android:scaleType="fitCenter"
@@ -43,9 +37,7 @@
             android:layout_toEndOf="@+id/blue_color_btn" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
+            style="@style/ButtonWeights"
             android:background="@drawable/red_color"
             android:id="@+id/red_color_btn"
             android:scaleType="fitCenter"
@@ -53,9 +45,7 @@
             android:layout_toEndOf="@+id/pink_color_btn" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
+            style="@style/ButtonWeights"
             android:background="@drawable/green_color"
             android:id="@+id/green_color_btn"
             android:scaleType="fitCenter"
@@ -65,20 +55,18 @@
 
         <ImageButton
             android:layout_width="10dp"
-            android:layout_height="10dp"
+            android:layout_height="2dp"
             android:id="@+id/brush_btn"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_below="@+id/palette"
             android:background="@raw/brush"
-            android:paddingBottom="10dp"
             android:layout_alignRight="@+id/palette"
-            android:layout_alignEnd="@+id/palette" />
+            android:layout_alignEnd="@+id/palette"
+            android:layout_alignParentBottom="true" />
 
         <ImageButton
-            android:layout_width="40dp"
-            android:layout_height="45dp"
+            style="@style/ImageButtonWeights"
             android:background="@raw/reset"
             android:scaleType="fitCenter"
             android:id="@+id/reset_btn"
@@ -87,9 +75,7 @@
             android:layout_alignParentEnd="true" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
+            style="@style/ButtonWeights"
             android:id="@+id/brush_small"
             android:background="@drawable/brush_small"
             android:layout_alignParentBottom="true"
@@ -97,9 +83,7 @@
             android:layout_toEndOf="@+id/palette" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
+            style="@style/ButtonWeights"
             android:id="@+id/brush_medium"
             android:background="@drawable/brush_medium"
             android:layout_alignParentBottom="true"
@@ -107,9 +91,7 @@
             android:layout_toEndOf="@+id/brush_small" />
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="40dp"
-            android:layout_height="35dp"
+            style="@style/ButtonWeights"
             android:id="@+id/brush_large"
             android:background="@drawable/brush_large"
             android:layout_alignParentBottom="true"
@@ -121,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/button"
-            android:text="Gallery"
+            android:text="@string/gallery_option"
             android:onClick="openGalleryIntent"
             android:layout_alignParentBottom="true"
             android:layout_alignRight="@+id/reset_btn"
@@ -131,7 +113,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/palette_layout">
         <com.example.priyakarambelkar.paintapplication.DrawableViewClass
             android:id="@+id/drawCustomView"

@@ -2,6 +2,7 @@ package com.example.priyakarambelkar.paintapplication;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -74,16 +75,16 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
                 }
                 break;
             case R.id.red_color_btn:
-                drawableView.setColor("RED");
+                drawableView.setColor(Color.RED);
                 break;
             case R.id.green_color_btn:
-                drawableView.setColor("GREEN");
+                drawableView.setColor(Color.GREEN);
                 break;
             case R.id.pink_color_btn:
-                drawableView.setColor("MAGENTA");
+                drawableView.setColor(Color.MAGENTA);
                 break;
             case R.id.blue_color_btn:
-                drawableView.setColor("BLUE");
+                drawableView.setColor(Color.BLUE);
                 break;
             case R.id.reset_btn:
                 drawableView.resetCanvas();

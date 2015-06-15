@@ -6,5 +6,6 @@
     <string name="action_brush">Brush</string>
     <string name="action_clear">Clear All</string>
     <string name="action_save">Save</string>
+    <string name="gallery_option">Gallery</string>
 
 </resources>
